@@ -5,20 +5,31 @@ import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    lateinit var listsRecyclerView: RecyclerView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                     .setAction("Action", null).show()
         }
+        // 1
+        listsRecyclerView = findViewById(R.id.lists_recyclerview)
+// 2
+        listsRecyclerView.layoutManager = LinearLayoutManager(this)
+// 3
+        listsRecyclerView.adapter = ListSelectionRecyclerViewAdapter()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
