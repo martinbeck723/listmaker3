@@ -1,10 +1,13 @@
 package com.raywenderlich.listmaker3
 
 import android.os.Bundle
+import android.text.InputType
 import com.google.android.material.snackbar.Snackbar
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.EditText
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 
@@ -46,5 +49,26 @@ class MainActivity : AppCompatActivity() {
             R.id.action_settings -> true
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    private fun showCreateListDialog() {
+// 1 Retrieve the strings defined in strings.xml for use in the Dialog
+        val dialogTitle = getString(R.string.name_of_list)
+        val positiveButtonTitle = getString(R.string.create_list)
+/* 2 Create an AlertDialog.Builder to help construct the Dialog. An EditText View is created as well to serve as the input field for the user to enter the name of the list.
+The inputType of the EditText is set to TYPE_CLASS_TEXT. Specifying the input type gives Android a hint as to what the most appropriate keyboard to show is. In this case, a text-based keyboard, since you want the list to have a name.
+The title of the Dialog is set by calling setTitle. You also pass in the content View of the Dialog. In this case the EditText View, by calling setView.*/
+        val builder = AlertDialog.Builder(this)
+        val listTitleEditText = EditText(this)
+
+        listTitleEditText.inputType = InputType.TYPE_CLASS_TEXT
+        builder.setTitle(dialogTitle)
+        builder.setView(listTitleEditText)
+// 3
+        builder.setPositiveButton(positiveButtonTitle) { dialog, _ ->
+            dialog.dismiss()
+        }
+// 4 you instruct the Dialog Builder to create the Dialog and display it on the screen.
+        builder.create().show()
     }
 }
