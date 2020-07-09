@@ -23,10 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        fab.setOnClickListener { showCreateListDialog() }
         // 1
         listsRecyclerView = findViewById(R.id.lists_recyclerview)
 // 2
@@ -64,7 +61,10 @@ The title of the Dialog is set by calling setTitle. You also pass in the content
         listTitleEditText.inputType = InputType.TYPE_CLASS_TEXT
         builder.setTitle(dialogTitle)
         builder.setView(listTitleEditText)
-// 3
+/* 3 Inform the Dialog Builder that you want to add a positive button to the Dialog;
+this tells the Dialog a positive action has occurred and something should happen.
+You can also use negative buttons for doing things that you consider negative in
+your app, such as canceling an action.*/
         builder.setPositiveButton(positiveButtonTitle) { dialog, _ ->
             dialog.dismiss()
         }
